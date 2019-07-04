@@ -1,11 +1,13 @@
 
 
-//helloworld.js:
+var DEBUG=false;
+
 
 Module.register("MMM-Hostname",{
 	// Default module config.
 	defaults: {
-		text: "Hello World!"
+        text: "Hello World!",
+        size: "5"
 	},
 
     // Override dom generator.
@@ -13,7 +15,11 @@ Module.register("MMM-Hostname",{
 	getDom: function() {
         var wrapper = document.createElement("div");
         //wrapper.setAttribute"id",".headline";
-        wrapper.innerHTML = '<font size="3">'+ this.hostname + '</font>';  //Was actually working with Hostname
+        
+        //this.size="10";
+        if (DEBUG) {Log.log("Font Size from Config or Default: " + this.size.toString())};
+        wrapper.innerHTML = '<font size="' + this.size.toString() + '">' + this.hostname + '</font>';
+        if (DEBUG) {Log.log ("INNERHTML: " +wrapper.innerHTML)}; 
         //wrapper.innerHTML = '<font size="1">'+ this.hostname + '</font>';  //Was actually working with Hostname
         //wrapper.innerHTML += '<BR><font size="2">'+ this.address + '</font>';
         //wrapper.innerHTML=this.IncidentInfo;
@@ -27,6 +33,7 @@ Module.register("MMM-Hostname",{
     },
     start: function() {
         this.hostname = "";
+        this.size=this.config.size;
         Log.log(this.name + ' is started!');
         var self = this;
         setInterval(function() {

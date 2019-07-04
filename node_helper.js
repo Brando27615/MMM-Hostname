@@ -1,6 +1,6 @@
 const fs = require('fs');
 const os = require('os');
-var DEBUG=true;
+var DEBUG=false;
 
 var NodeHelper = require("node_helper");
 module.exports = NodeHelper.create({
